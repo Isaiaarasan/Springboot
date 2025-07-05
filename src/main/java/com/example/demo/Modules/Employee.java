@@ -1,4 +1,4 @@
-package Modules;
+package com.example.demo.Modules;
 
 
 import lombok.AllArgsConstructor;
@@ -13,4 +13,10 @@ public class Employee {
    private String Job;
 
 
+   public Employee(int i, String arasan, String king) {
+   }
+
+   public int getEmpID() {
+       return 0;
+   }
 }

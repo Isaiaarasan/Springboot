@@ -1,6 +1,6 @@
-package Controllers;
+package com.example.demo.Controllers;
 
-import Services.HelloWorldService;
+import com.example.demo.Services.HelloWorldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ public class HelloWorldController {
 
     @GetMapping("/")
     public String getMethod(){
-        return hws.getMethod();
+        return hws.getEmp().toString();
     }
 
     @PostMapping("/")
