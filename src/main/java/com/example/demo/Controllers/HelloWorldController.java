@@ -1,33 +1,44 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.Modules.Employee;
 import com.example.demo.Services.HelloWorldService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@Controller
+@RequestMapping("/api/employees")  // IMPORTANT FIX
 public class HelloWorldController {
+
     @Autowired
-    HelloWorldService hws;
+    private HelloWorldService helloWorldService;
 
-    @GetMapping("/")
-    public String getMethod(){
-        return hws.getEmp().toString();
+    @GetMapping
+    public List<Employee> getAllEmployees() {
+        return helloWorldService.getAllEmployees();
     }
 
-    @PostMapping("/")
-    public String postMethod(){
-        return hws.postMethod();
+    @GetMapping("/{id}")
+    public Employee getEmployeeById(@PathVariable int id) {
+        return helloWorldService.getEmployeeById(id);
     }
 
-    @PutMapping("/")
-    public String putMethod(){
-        return hws.putMethod();
+    @PostMapping
+    public String addEmployee(@RequestBody Employee employee) {
+        helloWorldService.addEmployee(employee);
+        return "Employee added successfully!";
     }
 
-    @DeleteMapping("/")
-    public String deleteMethod(){
-        return hws.deleteMethod();
-}
+    @PutMapping("/{id}")
+    public String updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
+        boolean updated = helloWorldService.updateEmployee(id, employee);
+        return updated ? "Employee updated!" : "Employee not found!";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteEmployee(@PathVariable int id) {
+        boolean deleted = helloWorldService.deleteEmployee(id);
+        return deleted ? "Employee deleted!" : "Employee not found!";
+    }
 }

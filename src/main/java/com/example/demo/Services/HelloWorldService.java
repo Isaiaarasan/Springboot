@@ -4,60 +4,48 @@ import com.example.demo.Modules.Employee;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class HelloWorldService {
 
+    private List<Employee> employees = new ArrayList<>();
 
-
-    List<Employee> emp =new ArrayList<>(
-            Arrays.asList(new Employee(1,"arasan","King"),
-                    new Employee(2,"Guru","Sipai"))
-    );
-
-    public List<Employee> getEmp() {
-        return emp;
+    public HelloWorldService() {
+        employees.add(new Employee(1, "Arasan", "King"));
+        employees.add(new Employee(2, "Guru", "Sipai"));
     }
 
 
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+    }
 
-        List<Employee> employees = new ArrayList<>();
 
-        public Employee getEmployeeById(int empID) {
-            int index = -1;
+    public List<Employee> getAllEmployees() {
+        return employees;
+    }
 
-            for (int i = 0; i < employees.size(); i++) {
-                if (empID == employees.get(i).getEmpID()) {
-                    System.out.println("Employee Found: " + employees.get(i).getEmpID());
-                    index = i;
-                    break;
-                }
-            }
 
-            if (index != -1) {
-                return employees.get(index);
-            } else {
-                System.out.println("Employee Not Found!");
-                return null;
+    public Employee getEmployeeById(int empID) {
+        return employees.stream()
+                .filter(emp -> emp.getEmpID() == empID)
+                .findFirst()
+                .orElse(null);
+    }
+
+
+    public boolean updateEmployee(int empID, Employee updatedEmp) {
+        for (int i = 0; i < employees.size(); i++) {
+            if (employees.get(i).getEmpID() == empID) {
+                employees.set(i, updatedEmp);
+                return true;
             }
         }
-
-    public void setEmp(List<Employee> emp) {
-        this.emp = emp;
+        return false;
     }
 
-    public String getMethod(){
-        return "Get Method";
-    }
-    public String postMethod(){
-        return "Post Method";
-    }
-    public String putMethod(){
-        return "Put Method";
-    }
-    public String deleteMethod(){
-        return "Delete Method";
+    public boolean deleteEmployee(int empID) {
+        return employees.removeIf(emp -> emp.getEmpID() == empID);
     }
 }

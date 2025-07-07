@@ -1,22 +1,40 @@
 package com.example.demo.Modules;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
 public class Employee {
-
    private int empID;
-   private String name;
-   private String Job;
+   private String empName;
+   private String designation;
 
+   public Employee() {
+   }
 
-   public Employee(int i, String arasan, String king) {
+   public Employee(int empID, String empName, String designation) {
+      this.empID = empID;
+      this.empName = empName;
+      this.designation = designation;
    }
 
    public int getEmpID() {
-       return 0;
+      return empID;
+   }
+
+   public void setEmpID(int empID) {
+      this.empID = empID;
+   }
+
+   public String getEmpName() {
+      return empName;
+   }
+
+   public void setEmpName(String empName) {
+      this.empName = empName;
+   }
+
+   public String getDesignation() {
+      return designation;
+   }
+
+   public void setDesignation(String designation) {
+      this.designation = designation;
    }
 }
