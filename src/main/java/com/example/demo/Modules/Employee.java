@@ -1,40 +1,29 @@
 package com.example.demo.Modules;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "employee") // optional if table name is same
 public class Employee {
-   private int empID;
-   private String empName;
-   private String designation;
 
-   public Employee() {
-   }
+   @Id
+   private int id;
 
-   public Employee(int empID, String empName, String designation) {
-      this.empID = empID;
-      this.empName = empName;
-      this.designation = designation;
-   }
+   private String name;
 
-   public int getEmpID() {
-      return empID;
-   }
+   private String department;
 
-   public void setEmpID(int empID) {
-      this.empID = empID;
-   }
+    private Employee() {
+    }
 
-   public String getEmpName() {
-      return empName;
-   }
+   /**
+    * @return
+    */
+    public static Employee createEmployee() {
+        return new Employee();
+    }
 
-   public void setEmpName(String empName) {
-      this.empName = empName;
-   }
-
-   public String getDesignation() {
-      return designation;
-   }
-
-   public void setDesignation(String designation) {
-      this.designation = designation;
-   }
+    // Add getters, setters, constructors
 }
